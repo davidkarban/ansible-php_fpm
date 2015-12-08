@@ -1,0 +1,6 @@
+---
+# defaults file for php-fpm
+php_fpm: true
+
+php_memory_limit: "128M"
+

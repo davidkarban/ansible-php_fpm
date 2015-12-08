@@ -1,0 +1,5 @@
+---
+# handlers file for php-fpm
+- name: reload php-fpm
+  tags: php-fpm
+  service: name={{ service }} state={{ state }}
