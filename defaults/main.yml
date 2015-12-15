@@ -3,4 +3,6 @@
 php_fpm: true
 
 php_memory_limit: "128M"
+php_max_input_vars: "1000"
+
 
