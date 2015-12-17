@@ -67,6 +67,11 @@
     - item.php_fpm is defined
     - item.owner != default_owner
 
+# Allow Apache to listen on tcp port 8888
+- name: Ensure php-fpm can run on another ports (selinux) and allow apache to connect to it
+  seport: ports={{ php_fpm.address.split(":")[1] }} proto=tcp setype=http_port_t state=present
+  with_items: vhosts
+
 - name: Ensure php-fpm is running
   tags: php-fpm
   service: name={{ service }} state=started enabled=yes
