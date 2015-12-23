@@ -153,7 +153,7 @@ pm.max_spare_servers = {{ item.php_fpm.max_spare_servers|default(5) }}
 ; The log file for slow requests
 ; Default Value: not set
 ; Note: slowlog is mandatory if request_slowlog_timeout is set
-slowlog = {{ apache_vhosts_base_dir + '/' + item.owner + '/log/php-slow.log' }}
+slowlog = {{ item.home|default(apache_vhosts_base_dir + '/' + item.owner) + '/log/php-slow.log' }}
  
 ; Set open file descriptor rlimit.
 ; Default Value: system defined value
@@ -216,11 +216,11 @@ security.limit_extensions = .php
 ;                specified at startup with the -d argument
 ;php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com
 ;php_flag[display_errors] = off
-php_admin_value[error_log] = {{ apache_vhosts_base_dir + '/' + item.owner + '/log/php-error.log' }}
+php_admin_value[error_log] = {{ item.home|default(apache_vhosts_base_dir + '/' + item.owner) + '/log/php-error.log' }}
 php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 128M
 
 ; Set session path to a directory owned by process user
 php_value[session.save_handler] = files
-php_value[session.save_path] = {{ apache_vhosts_base_dir + '/' + item.owner + '/session' }}
+php_value[session.save_path] = {{ item.home|default(apache_vhosts_base_dir + '/' + item.owner) + '/session' }}
 
