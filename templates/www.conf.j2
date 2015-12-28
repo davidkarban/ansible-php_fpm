@@ -216,11 +216,12 @@ slowlog = /var/log/php-fpm/www-slow.log
 ;                specified at startup with the -d argument
 ;php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com
 ;php_flag[display_errors] = off
-php_admin_value[error_log] = /var/log/php-fpm/www-error.log
+php_admin_value[error_log] = {{ php_fpm_log_dir }}
 php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 128M
 
 ; Set session path to a directory owned by process user
 php_value[session.save_handler] = files
-;php_value[session.save_path] = {% if ansible_os_family == "Debian" %}/var/lib/php5{% else %}/var/lib/php/session{% endif %}
+php_value[session.save_path] = {{ php_fpm_session_dir }}
+
 
