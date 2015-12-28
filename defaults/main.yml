@@ -7,3 +7,8 @@ php_max_input_vars: "1000"
 
 php_fpm_port_range: "9001-9010"
 
+# session dir for default pool
+php_fpm_session_dir: "{{ php_fpm_default_session_dir }}"
+
+# log dir for default pool
+php_fpm_log_dir: "{{ php_fpm_default_log_dir }}"

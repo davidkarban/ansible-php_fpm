@@ -23,7 +23,7 @@
 
 - name: Ensure master configuration is in place
   tags: php-fpm
-  template: src={{ item.name + '.j2' }} dest={{ item.path + '/' + item.name }} owner=root group=root mode=0640
+  template: src={{ item.name + '.j2' }} dest={{ item.path + '/' + item.name }} owner=root group=root mode=0640 backup=yes
   with_items:
     - { name: php-fpm.conf, path: "{{ config_directory }}" }
     - { name: php.ini, path: "{{ config_directory }}" }
@@ -48,6 +48,13 @@
     - item.php_fpm is defined
     - item.owner != default_owner
 
+- name: Ensure default php-fpm log and session dirs are prepared
+  tags: php-fpm
+  file: path={{ item.path }} state=directory owner={{ default_owner }} group={{ default_owner }} mode=0755 
+  with_items:
+    - { name: 'log', path: "{{ php_fpm_log_dir }}" }
+    - { name: "session", path: "{{ php_fpm_session_dir }}" }
+
 - name: Ensure php-fpm log and session dirs are prepared
   tags: php-fpm
   file: path={{ item[0].home|default("/home/" + item[0].owner) + '/' + item[1] }} state=directory owner={{ item[0].owner }} group={{ item[0].owner | default(default_owner) }} mode=0755 
@@ -60,7 +67,7 @@
 
 - name: Ensure all pools are available
   tags: php-fpm
-  template: src=pool.conf.j2 dest={{ pool_directory + '/' + item.owner|default(default_owner) + '.conf' }} owner={{ item.owner|default(default_owner) }} group={{ item.owner|default(default_owner) }} mode=0600
+  template: src=pool.conf.j2 dest={{ pool_directory + '/' + item.owner|default(default_owner) + '.conf' }} owner={{ item.owner|default(default_owner) }} group={{ item.owner|default(default_owner) }} mode=0600 backup=yes
   with_items: vhosts
   notify: reload php-fpm
   when: 

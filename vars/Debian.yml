@@ -17,3 +17,7 @@ error_log: /var/log/php-fpm.log
 state: "restarted"
 
 daemonize: "{% if ansible_distribution == 'Debian' and ansible_distribution_major_version|int <= 7 %}yes{% else %}no{% endif %}"
+
+php_fpm_default_session_dir: "/var/lib/php5/"
+php_fpm_default_log_dir: "/var/log/php-fpm/"
+
