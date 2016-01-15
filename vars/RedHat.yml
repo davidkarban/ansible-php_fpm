@@ -21,7 +21,7 @@ pidfile: /run/php-fpm/php-fpm.pid
 error_log: /var/log/php-fpm/error.log
 
 # problem on debian: look at: /etc/init/php5-fpm.conf
-state: "reloaded"
+php_fpm_state_default: "reloaded"
 
 daemonize: "{% if ansible_distribution_major_version|int > 6 %}no{% else %}yes{% endif %}"
 

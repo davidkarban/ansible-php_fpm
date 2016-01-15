@@ -18,3 +18,5 @@ php_fpm_max_children: "5"
 php_fpm_start_servers: "1"
 php_fpm_min_spare_servers: "2"
 php_fpm_max_spare_servers: "5"
+
+state: "{{ php_fpm_state_default }}"
