@@ -1,11 +1,11 @@
-pkgs: 
+php_fpm_pkgs: 
   - php-fpm
   - php-pdo
   - php-password-compat
   - php-mysqlnd
   - php-gd
 
-service: php-fpm
+php_fpm_service: php-fpm
 
 config_directory: /etc
 #master_config_file: /etc/php-fpm.conf

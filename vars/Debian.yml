@@ -1,7 +1,7 @@
-pkgs: 
+php_fpm_pkgs: 
   - php5-fpm
 
-service: php5-fpm
+php_fpm_service: php5-fpm
 
 config_directory: /etc/php5/fpm
 pool_directory: /etc/php5/fpm/pool.d
