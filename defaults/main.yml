@@ -26,3 +26,5 @@ php_fpm_config_directory: '{{ __php_fpm_config_directory }}'
 php_fpm_pool_directory: '{{ __php_fpm_pool_directory }}'
 php_fpm_modules_dir: '{{ __php_fpm_modules_dir }}'
 
+php_fpm_service: '{{ __php_fpm_service }}'
+
