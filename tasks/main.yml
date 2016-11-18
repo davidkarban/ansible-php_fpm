@@ -25,9 +25,9 @@
   tags: php-fpm
   template: src={{ item.name + '.j2' }} dest={{ item.path + '/' + item.name }} owner=root group=root mode=0640 backup=yes
   with_items:
-    - { name: php-fpm.conf, path: "{{ config_directory }}" }
-    - { name: php.ini, path: "{{ config_directory }}" }
-    - { name: www.conf, path: "{{ pool_directory }}" }
+    - { name: php-fpm.conf, path: "{{ php_fpm_config_directory }}" }
+    - { name: php.ini, path: "{{ php_fpm_config_directory }}" }
+    - { name: www.conf, path: "{{ php_fpm_pool_directory }}" }
   notify: reload php-fpm
 
 - name: Ensure fpm users are available
@@ -67,7 +67,7 @@
 
 - name: Ensure all pools are available
   tags: php-fpm
-  template: src=pool.conf.j2 dest={{ pool_directory + '/' + item.owner|default(default_owner) + '.conf' }} owner={{ item.owner|default(default_owner) }} group={{ item.owner|default(default_owner) }} mode=0600 backup=yes
+  template: src=pool.conf.j2 dest={{ php_fpm_pool_directory + '/' + item.owner|default(default_owner) + '.conf' }} owner={{ item.owner|default(default_owner) }} group={{ item.owner|default(default_owner) }} mode=0600 backup=yes
   with_items: '{{ vhosts }}'
   notify: reload php-fpm
   when: 
