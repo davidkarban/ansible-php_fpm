@@ -20,3 +20,6 @@ php_fpm_min_spare_servers: "2"
 php_fpm_max_spare_servers: "5"
 
 state: "{{ php_fpm_state_default }}"
+
+php_fpm_pkgs: '{{ __php_fpm_pkgs }}'
+

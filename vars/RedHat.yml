@@ -1,4 +1,4 @@
-php_fpm_pkgs: 
+__php_fpm_pkgs: 
   - php-fpm
   - php-pdo
   - php-password-compat
