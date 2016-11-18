@@ -7,12 +7,12 @@ __php_fpm_pkgs:
 
 php_fpm_service: php-fpm
 
-config_directory: /etc
+__php_fpm_config_directory: /etc
 #master_config_file: /etc/php-fpm.conf
 #php_ini_file: /etc/php.ini
 
-pool_directory: /etc/php-fpm.d 
-modules_dir: /etc/php.d
+__php_fpm_pool_directory: /etc/php-fpm.d 
+__php_fpm_modules_dir: /etc/php.d
 
 default_owner: apache
 

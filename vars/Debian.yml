@@ -3,9 +3,9 @@ __php_fpm_pkgs:
 
 php_fpm_service: php5-fpm
 
-config_directory: /etc/php5/fpm
-pool_directory: /etc/php5/fpm/pool.d
-modules_dir: /etc/php5/fpm/conf.d
+__php_fpm_config_directory: /etc/php5/fpm
+__php_fpm_pool_directory: /etc/php5/fpm/pool.d
+__php_fpm_modules_dir: /etc/php5/fpm/conf.d
 
 default_owner: www-data
 

@@ -22,4 +22,7 @@ php_fpm_max_spare_servers: "5"
 state: "{{ php_fpm_state_default }}"
 
 php_fpm_pkgs: '{{ __php_fpm_pkgs }}'
+php_fpm_config_directory: '{{ __php_fpm_config_directory }}'
+php_fpm_pool_directory: '{{ __php_fpm_pool_directory }}'
+php_fpm_modules_dir: '{{ __php_fpm_modules_dir }}'
 
