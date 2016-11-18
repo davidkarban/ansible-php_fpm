@@ -87,5 +87,5 @@
 
 - name: Ensure php-fpm is running
   tags: php-fpm
-  service: name={{ service }} state=started enabled=yes
+  service: name={{ php_fpm_service }} state=started enabled=yes
 
