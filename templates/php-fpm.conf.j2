@@ -8,7 +8,7 @@
 ; Include one or more files. If glob(3) exists, it is used to include a bunch of
 ; files from a glob(3) pattern. This directive can be used everywhere in the
 ; file.
-include={{ pool_directory }}/*.conf
+include={{ php_fpm_pool_directory }}/*.conf
 
 ;;;;;;;;;;;;;;;;;;
 ; Global Options ;
@@ -56,5 +56,5 @@ daemonize = {{ daemonize }}
 ; Pool Definitions ; 
 ;;;;;;;;;;;;;;;;;;;;
 
-; See {{ pool_directory }}/*.conf
+; See {{ php_fpm_pool_directory }}/*.conf
 
