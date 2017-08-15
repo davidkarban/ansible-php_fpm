@@ -4,6 +4,7 @@ __php_fpm_pkgs:
   - php-password-compat
   - php-mysqlnd
   - php-gd
+  - php-opcache
 
 __php_fpm_service: php-fpm
 

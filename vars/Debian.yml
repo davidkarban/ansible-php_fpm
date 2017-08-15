@@ -1,5 +1,6 @@
 __php_fpm_pkgs: 
   - php5-fpm
+  - php5-php-opcache
 
 __php_fpm_service: php5-fpm
 

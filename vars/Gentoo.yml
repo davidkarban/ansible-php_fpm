@@ -1,0 +1,25 @@
+__php_fpm_pkgs:  []
+
+__php_fpm_service: php-fpm
+
+__php_fpm_config_directory: /etc/php/fpm-php7.0/
+#master_config_file: /etc/php-fpm.conf
+#php_ini_file: /etc/php.ini
+
+__php_fpm_pool_directory: /etc/php/fpm-php7.0/fpm.d/
+__php_fpm_modules_dir: /etc/php/fpm-php7.0/ext-active/
+
+default_owner: app
+
+pidfile: /run/php-fpm/php-fpm.pid
+
+error_log: /srv/log/php-fpm/error.log
+
+# problem on debian: look at: /etc/init/php5-fpm.conf
+php_fpm_state_default: "reloaded"
+
+daemonize: "{% if ansible_distribution_major_version|int > 6 %}no{% else %}yes{% endif %}"
+
+php_fpm_default_session_dir: "/srv/php-session"
+php_fpm_default_log_dir: "/srv/log/php-fpm/"
+

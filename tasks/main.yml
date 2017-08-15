@@ -35,7 +35,7 @@
     - php-fpm
     - user
   user: name={{ item.owner }} shell=/bin/bash createhome=yes state=present generate_ssh_key=true home={{ item.home|default("/home/" + item.owner) }}
-  with_items: '{{ vhosts }}'
+  with_items: '{{ vhosts|default("[]") }}'
   when: 
     - item.php_fpm is defined
     - item.owner != default_owner
@@ -43,7 +43,7 @@
 - name: Ensure home directories have sufficient privileges for apache
   tags: php-fpm
   file: path={{ item.home|default("/home/" + item.owner) + '/' }} owner={{ item.owner }} group={{ default_owner }} mode=0710
-  with_items: '{{ vhosts }}'
+  with_items: '{{ vhosts|default("[]") }}'
   when:
     - item.php_fpm is defined
     - item.owner != default_owner
@@ -59,7 +59,7 @@
   tags: php-fpm
   file: path={{ item[0].home|default("/home/" + item[0].owner) + '/' + item[1] }} state=directory owner={{ item[0].owner }} group={{ item[0].owner | default(default_owner) }} mode=0755 
   with_nested:
-    - '{{ vhosts }}'
+    - '{{ vhosts|default("[]") }}'
     - ['log', 'session']
   when: 
     - item[0].php_fpm is defined
@@ -68,7 +68,7 @@
 - name: Ensure all pools are available
   tags: php-fpm
   template: src=pool.conf.j2 dest={{ php_fpm_pool_directory + '/' + item.owner|default(default_owner) + '.conf' }} owner={{ item.owner|default(default_owner) }} group={{ item.owner|default(default_owner) }} mode=0600 backup=yes
-  with_items: '{{ vhosts }}'
+  with_items: '{{ vhosts|default("[]") }}'
   notify: reload php-fpm
   when: 
     - item.php_fpm is defined
@@ -84,6 +84,17 @@
 #- name: Ensure php-fpm can run on another ports (selinux) and allow apache to connect to it
 #  tags: php-fpm
 #  seport: ports={{ php_fpm_port_range }} proto=tcp setype=http_port_t state=present reload=true
+
+# ensure we have eselected php-fpm on gentoo
+- name: Ensure php-fpm is eselected
+  stat: 
+    path: '/usr/bin/php-fpm'
+  register: stat
+
+- name: Proceed eselect if php not avaiable
+  command: eselect php set fpm 1
+  when: 
+    - not stat.stat.exists
 
 - name: Ensure php-fpm is running
   tags: php-fpm
