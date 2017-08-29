@@ -1,0 +1,10 @@
+# ensure we have eselected php-fpm on gentoo
+- name: Ensure php-fpm is eselected
+  stat:
+    path: '/usr/bin/php-fpm'
+  register: stat
+
+- name: Proceed eselect if php not available
+  command: eselect php set fpm 1
+  when:
+    - not stat.stat.exists
