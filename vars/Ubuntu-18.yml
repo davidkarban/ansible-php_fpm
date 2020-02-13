@@ -1,0 +1,46 @@
+__php_fpm_pkgs: 
+  - php-fpm
+  - php-pear
+  - php7.2
+  - php7.2-cgi
+  - php7.2-cli
+  - php7.2-common
+  - php7.2-curl
+  - php7.2-gd
+  - php7.2-imap
+  - php7.2-sqlite3
+  - php7.2-mysqlnd
+  - php7.2-dev
+  - php7.2-imagick
+  - php7.2-intl
+  - php7.2-memcache
+  - php7.2-pspell
+  - php7.2-recode
+  - php7.2-tidy
+  - php7.2-xmlrpc
+  - php7.2-xsl
+  - php7.2-opcache
+  - php-mbstring
+  - php7.2-mbstring
+  - php7.2-soap
+
+__php_fpm_service: php7.2-fpm
+
+__php_fpm_config_directory: /etc/php/7.2/fpm
+__php_fpm_pool_directory: "{{ __php_fpm_config_directory }}/pool.d"
+__php_fpm_modules_dir: "{{ __php_fpm_config_directory }}/conf.d"
+
+default_owner: www-data
+
+pidfile: /run/php/php7.2-fpm.pid
+
+error_log: /var/log/php7.2-fpm.log
+
+# problem on debian: look at: /etc/init/php5-fpm.conf
+php_fpm_state_default: "restarted"
+
+daemonize: "{% if ansible_distribution == 'Debian' and ansible_distribution_major_version|int <= 7 %}yes{% else %}no{% endif %}"
+
+php_fpm_default_session_dir: "/var/lib/php/sessions"
+php_fpm_default_log_dir: "/var/log/"
+
