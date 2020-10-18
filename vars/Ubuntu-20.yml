@@ -15,7 +15,6 @@ __php_fpm_pkgs:
   - php7.4-intl
   - php7.4-memcache
   - php7.4-pspell
-  - php7.4-recode
   - php7.4-tidy
   - php7.4-xmlrpc
   - php7.4-xsl
